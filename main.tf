@@ -290,7 +290,7 @@ resource "aws_codebuild_source_credential" "authorization" {
 }
 
 resource "aws_codebuild_webhook" "example" {
-  project_name = aws_codebuild_project.deafult.name
+  project_name = join("", aws_codebuild_project.deafult.*.name)
   build_type   = "BUILD"
   filter_group {
     filter {
@@ -412,6 +412,8 @@ resource "aws_codebuild_project" "default" {
     }
 
   }
+
+
 
   source {
     buildspec           = var.buildspec
